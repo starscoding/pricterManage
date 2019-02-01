@@ -1,0 +1,48 @@
+server:
+  port: 8088
+
+weather:
+  query:
+#    url: http://api.help.bj.cn/apis/weather6d/?id=101280601
+    url: https://free-api.heweather.com/s6/weather/forecast?location=%E6%B7%B1%E5%9C%B3&key=be429c34e84e48f19e41f6072f7563a3
+
+# outlook 邮箱配置
+#spring:
+#
+#  mail:
+#    host : smtp.office365.com
+#    port : 587
+#    username : mr.xuzheng@outlook.com
+#    password : shouwang-13
+#    properties:
+#        mail:
+#          smtp:
+#            auth : true
+#            timeout : 25000
+#            socketFactory :
+#              fallback : true
+#            starttls:
+#              enable : true
+#              required : true
+
+# QQ邮箱配置
+spring:
+
+  mail:
+    host : smtp.qq.com
+#    port : 465
+    username : mr.xuzheng@foxmail.com
+    password : mdcbwhtrugjkbjaf
+    properties:
+      mail:
+        smtp:
+          auth : true
+          timeout : 25000
+          socketFactory :
+            fallback : true
+          starttls:
+            enable : true
+            required : true
+
+email :
+  emailFrom : mr.xuzheng@foxmail.com
