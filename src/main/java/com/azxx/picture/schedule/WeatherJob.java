@@ -1,9 +1,9 @@
-package com.azxx.demon.schedule;
+package com.azxx.picture.schedule;
 
-import com.azxx.demon.modal.weather.HeWeather;
-import com.azxx.demon.modal.weather.TodayWeather;
-import com.azxx.demon.service.EmailService;
-import com.azxx.demon.utils.HttpUtils;
+import com.azxx.picture.modal.weather.HeWeather;
+import com.azxx.picture.modal.weather.TodayWeather;
+import com.azxx.picture.service.EmailService;
+import com.azxx.picture.utils.HttpUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

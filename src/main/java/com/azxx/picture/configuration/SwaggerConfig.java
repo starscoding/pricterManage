@@ -1,4 +1,4 @@
-package com.azxx.demon.configuration;
+package com.azxx.picture.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class SwaggerConfig {
                 .enable(true)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.azxx.demon.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.azxx.picture.controller"))
                 .build();
     }
 

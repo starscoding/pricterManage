@@ -1,4 +1,4 @@
-package com.azxx.demon.modal.weather;
+package com.azxx.picture.modal.weather;
 
 public class HeWeather {
     private String date;//	预报日期	2013-12-30

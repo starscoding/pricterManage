@@ -1,4 +1,4 @@
-package com.azxx.demon;
+package com.azxx.picture;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -17,10 +17,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@SpringBootApplication(exclude = {Starter.class,HelloWorld.class}) // 等同于 @EnableAutoConfiguration @ComponentScan @Configuration
 @SpringBootApplication // 等同于 @EnableAutoConfiguration @ComponentScan @Configuration
 @ComponentScan(basePackages = {
-        "com.azxx.demon.configuration",
-        "com.azxx.demon.controller",
-        "com.azxx.demon.service",
-        "com.azxx.demon.schedule"})
+        "com.azxx.picture.configuration",
+        "com.azxx.picture.controller",
+        "com.azxx.picture.service",
+        "com.azxx.picture.schedule"})
 @EnableScheduling
 public class Starter {
 

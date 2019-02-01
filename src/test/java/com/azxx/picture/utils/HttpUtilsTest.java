@@ -1,7 +1,7 @@
-package com.azxx.demon.utils;
+package com.azxx.picture.utils;
 
-import com.azxx.demon.modal.weather.HeWeather;
-import com.azxx.demon.modal.weather.TodayWeather;
+import com.azxx.picture.modal.weather.HeWeather;
+import com.azxx.picture.modal.weather.TodayWeather;
 import com.google.gson.*;
 import org.junit.Ignore;
 import org.junit.Test;
