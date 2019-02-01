@@ -58,8 +58,14 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
 
 druid:
-  url: jdbc:mysql://localhost:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+  url: jdbc:mysql://127.0.0.1:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
   username: root
   password: shouwang13
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
 
 
