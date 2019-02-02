@@ -3,8 +3,10 @@
 ## 技术参数
 
 * SpringBoot
+* mybatis
 * druid
-* themeleaf
+* thymeleaf
 * bootstrap
+* swagger-ui
 
 
