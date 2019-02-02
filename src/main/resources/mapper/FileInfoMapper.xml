@@ -29,34 +29,34 @@
       file_info
     where 1=1
       <if test="name != null" >
-        and name = #{name,jdbcType=VARCHAR},
+        and name = #{name,jdbcType=VARCHAR}
       </if>
       <if test="title != null" >
-        and title = #{title,jdbcType=VARCHAR},
+        and title = #{title,jdbcType=VARCHAR}
       </if>
-      <if test="desc != null" >
-        and desc = #{desc,jdbcType=VARCHAR},
+      <if test="description != null" >
+        and desc = #{description,jdbcType=VARCHAR}
       </if>
       <if test="size != null" >
-        and size = #{size,jdbcType=INTEGER},
+        and size = #{size,jdbcType=INTEGER}
       </if>
       <if test="type != null" >
-        and type = #{type,jdbcType=VARCHAR},
+        and type = #{type,jdbcType=VARCHAR}
       </if>
       <if test="groupId != null" >
-        and group_id = #{groupId,jdbcType=INTEGER},
+        and group_id = #{groupId,jdbcType=INTEGER}
       </if>
       <if test="groupName != null" >
-        and group_name = #{groupName,jdbcType=VARCHAR},
+        and group_name = #{groupName,jdbcType=VARCHAR}
       </if>
       <if test="url != null" >
-        and url = #{url,jdbcType=VARCHAR},
+        and url = #{url,jdbcType=VARCHAR}
       </if>
       <if test="createTime != null" >
-        and create_time = #{createTime,jdbcType=TIMESTAMP},
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
       </if>
       <if test="recordTime != null" >
-        and record_time = #{recordTime,jdbcType=TIMESTAMP},
+        and record_time = #{recordTime,jdbcType=TIMESTAMP}
       </if>
       <if test="startTime != null" >
         <![CDATA[ and create_time >=  #{startTime} ]]>

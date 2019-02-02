@@ -49,6 +49,13 @@ spring:
     username: root
     password: shouwang13
     driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+    enabled: true
+    encoding: utf-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
 email :
   emailFrom : mr.xuzheng@foxmail.com
 
