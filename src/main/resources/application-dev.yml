@@ -25,9 +25,9 @@ weather:
 #              enable : true
 #              required : true
 
-# QQ邮箱配置
-spring:
 
+spring:
+  # QQ邮箱配置
   mail:
     host : smtp.qq.com
 #    port : 465
@@ -43,24 +43,25 @@ spring:
           starttls:
             enable : true
             required : true
-
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: shouwang13
+    driver-class-name: com.mysql.cj.jdbc.Driver
 email :
   emailFrom : mr.xuzheng@foxmail.com
 
 # 设置日志级别
 logging:
   level:
-    com.azxx.demon: debug
+    com.azxx.picture: debug
 
 # mybatis mapper 路径,mapperLocations指的路径是src/main/resources
 mybatis:
   typeAliasesPackage: com.azxx.picture.entity
   mapperLocations: classpath:mapper/*.xml
-
-druid:
-  url: jdbc:mysql://127.0.0.1:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-  username: root
-  password: shouwang13
+  base-packages:
 
 #pagehelper分页插件
 pagehelper:
