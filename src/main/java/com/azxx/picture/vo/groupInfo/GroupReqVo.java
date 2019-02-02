@@ -17,6 +17,17 @@ public class GroupReqVo {
     @ApiModelProperty(value = "分组名称",dataType = "string")
     private String name;
 
+    @ApiModelProperty(value = "ID",dataType = "int")
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getDesc() {
         return desc;
     }
