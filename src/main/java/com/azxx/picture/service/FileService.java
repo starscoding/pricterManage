@@ -3,6 +3,7 @@ package com.azxx.picture.service;
 import com.azxx.picture.entity.FileInfo;
 import com.azxx.picture.mapper.FileInfoMapper;
 import com.azxx.picture.vo.fileInfo.FileReqVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,28 @@ public class FileService {
         return fileInfoMapper.getFiles(reqVo);
     }
 
-    public Integer addFile(FileReqVo reqVo){
+    public Boolean addOrUpdateFile(FileReqVo reqVo){
+        int effectRows = 0;
         if(reqVo == null) {
-            return 0;
+            return false;
         }
         FileInfo fileInfo = new FileInfo();
         BeanUtils.copyProperties(reqVo,fileInfo);
-        return fileInfoMapper.insert(fileInfo);
+        if(reqVo.getId()==null){
+            effectRows = fileInfoMapper.insert(fileInfo);
+        }else{
+            effectRows = fileInfoMapper.updateByPrimaryKeySelective(fileInfo);
+        }
+        return effectRows>0?true:false;
     }
+
+    public boolean deleteFile(Integer id){
+        int effectRows = 0;
+        if(id == null) {
+            return false;
+        }
+        effectRows = fileInfoMapper.deleteByPrimaryKey(id);
+        return effectRows>0?true:false;
+    }
+
 }

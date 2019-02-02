@@ -39,31 +39,58 @@ public class FileController extends  BaseController{
     @ApiOperation(value = "获取图片列表" ,notes = "获取图片列表")
     @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
     public String getFiles(FileReqVo reqVo){
+
         if(reqVo == null){
             return paramsError();
         }
+
         logger.info("获取文件列表开始，参数：{}", JSON.toJSON(reqVo));
-        List<FileInfo> result = fileService.getFiles(reqVo);
-        return  queryOk(result);
+        try {
+            List<FileInfo> result = fileService.getFiles(reqVo);
+            return  queryOk(result);
+        }catch (Exception e){
+            e.printStackTrace();
+            return  error(null,OperateTypeEm.QUERY.toString());
+        }
+
     }
 
-    @RequestMapping(path = "/addFile",method = RequestMethod.POST)
-    @ApiOperation(value = "增加图片" ,notes = "增加图片")
+    @RequestMapping(path = "/addOrUpdateFile",method = RequestMethod.POST)
+    @ApiOperation(value = "增加或更新图片信息" ,notes = "增加或更新图片信息")
     @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
-    public String addFile(FileReqVo reqVo){
+    public String addOrUpdateFile(FileReqVo reqVo){
+
         if(reqVo == null){
             return paramsError();
         }
-        logger.info("获取文件列表开始，参数：{}", JSON.toJSON(reqVo));
+
+        logger.info("增加或更新图片信息，参数：{}", JSON.toJSON(reqVo));
         try{
-            Integer result = fileService.addFile(reqVo);
-            if(result>0){
-                return error(null,OperateTypeEm.UPDATE.toString());
-            }
+            fileService.addOrUpdateFile(reqVo);
+            return  updateOk(null);
         }catch (Exception e){
             e.printStackTrace();
             return  error(null,OperateTypeEm.UPDATE.toString());
         }
-        return  updateOk(null);
     }
+
+    @RequestMapping(path = "/deleteFile",method = RequestMethod.POST)
+    @ApiOperation(value = "删除图片信息" ,notes = "删除图片信息")
+    @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
+    public String deleteFile(Integer fileId){
+
+        if(fileId == null){
+            return paramsError();
+        }
+
+        logger.info("删除图片信息，参数：{}", fileId);
+        try{
+            fileService.deleteFile(fileId);
+            return updateOk(null);
+        }catch (Exception e){
+            e.printStackTrace();
+            return  error(null,OperateTypeEm.UPDATE.toString());
+        }
+    }
+
 }

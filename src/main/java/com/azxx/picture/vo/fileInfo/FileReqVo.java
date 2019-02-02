@@ -52,6 +52,16 @@ public class FileReqVo {
     @ApiModelProperty(value = "文件创建结束时间（格式YYYY-MM-DD）",dataType = "string")
     private String endTime;
 
+    private Integer id;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
