@@ -52,10 +52,10 @@ spring:
   thymeleaf:
     cache: false
     enabled: true
-    encoding: utf-8
-    mode: HTML5
-    prefix: classpath:/templates/
-    suffix: .html
+    encoding: "utf-8"
+    mode: "HTML5"
+    prefix: "classpath:/templates/"
+    suffix: ".html"
 email :
   emailFrom : mr.xuzheng@foxmail.com
 
@@ -75,5 +75,9 @@ pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
+
+#swagger 开启关闭
+swagger:
+  enable: false
 
 
