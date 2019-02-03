@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:include="header :: header"></head>
+<head th:include="header :: header" th:with="title='xx'" ></head>
 
 <body class="no-skin">
 <div id="navbar" class="navbar navbar-default          ace-save-state">
@@ -112,28 +112,15 @@
                     <span class="menu-text"> 相片管理 </span>
                     <b class="arrow"></b>
                 </a>
-
                 <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="tables.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Simple &amp; Dynamic
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="jqgrid.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            jqGrid plugin
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
+            </li>
+            <li class="">
+                <a href="#" >
+                    <i class="menu-icon fa fa-tag"></i>
+                    <span class="menu-text"> 分组管理 </span>
+                    <b class="arrow"></b>
+                </a>
+                <b class="arrow"></b>
             </li>
         </ul><!-- /.nav-list -->
 
