@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * @SpringBootApplication 包含了三个特点：
@@ -22,6 +23,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         "com.azxx.picture.service",
         "com.azxx.picture.schedule"})
 @EnableScheduling
+@EnableWebMvc
 public class Starter {
 
     public static void main(String[] args) {
