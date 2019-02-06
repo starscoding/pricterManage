@@ -45,9 +45,9 @@ spring:
             required : true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://47.101.138.153:3306/pictureManage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: shouwang13
+    password: ShouWang-!3!4
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false

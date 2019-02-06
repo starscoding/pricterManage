@@ -107,7 +107,7 @@
             </li>
 
             <li class="">
-                <a href="/fileManage/getFiles" >
+                <a href="/fileManage/getFiles" target="mainFrame">
                     <i class="menu-icon fa fa-image"></i>
                     <span class="menu-text"> 相片管理 </span>
                     <b class="arrow"></b>
@@ -152,18 +152,19 @@
                 </div><!-- /.nav-search -->
             </div>
 
-            <div class="page-content">
+            <div class="page-content" style="overflow: hidden;">
+                <iframe name="mainFrame" id="mainFrame" src="/fileManage/getFiles" frameborder="false" scrolling="no"  width="100%" height="100%" allowtransparency="true" onload="setIframeHeight(this)"></iframe>
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                        <div class="row">
-                            <div class="space-6"></div>
-                            <div class="vspace-12-sm"></div>
-                        </div><!-- /.row -->
-                        <!-- PAGE CONTENT ENDS -->
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12">-->
+                        <!--&lt;!&ndash; PAGE CONTENT BEGINS &ndash;&gt;-->
+                        <!--<div class="row">-->
+                            <!--<div class="space-6"></div>-->
+                            <!--<div class="vspace-12-sm"></div>-->
+                        <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
+                        <!--&lt;!&ndash; PAGE CONTENT ENDS &ndash;&gt;-->
+                    <!--</div>&lt;!&ndash; /.col &ndash;&gt;-->
+                <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
             </div><!-- /.page-content -->
         </div>
     </div><!-- /.main-content -->
@@ -192,6 +193,14 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    function setIframeHeight(iframe){
+        if(iframe){
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if(iframeWin.document.body){
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            }
+        }
+    }
     jQuery(function ($) {
         $('.easy-pie-chart.percentage').each(function () {
             var $box = $(this).closest('.infobox');
