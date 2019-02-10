@@ -3,7 +3,8 @@ package com.azxx.picture.service;
 import com.azxx.picture.entity.FileInfo;
 import com.azxx.picture.mapper.FileInfoMapper;
 import com.azxx.picture.vo.fileInfo.FileReqVo;
-import org.apache.commons.lang3.StringUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,13 @@ public class FileService {
             return result;
         }
         return fileInfoMapper.getFiles(reqVo);
+    }
+
+    public PageInfo<FileInfo> pages(FileReqVo reqVo){
+        PageHelper.startPage(reqVo.getPage(),reqVo.getRows());
+        List<FileInfo> result =  fileInfoMapper.getFiles(reqVo);
+        PageInfo<FileInfo>  pageInfo = new PageInfo<>(result);
+        return pageInfo;
     }
 
     public Boolean addOrUpdateFile(FileReqVo reqVo){

@@ -5,6 +5,7 @@ import com.azxx.picture.entity.FileInfo;
 import com.azxx.picture.service.FileService;
 import com.azxx.picture.vo.OperateTypeEm;
 import com.azxx.picture.vo.fileInfo.FileReqVo;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -12,8 +13,6 @@ import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +27,7 @@ import java.util.List;
  * @create: 2019-02-02 10:08
  **/
 
-@Controller
+@RestController
 @RequestMapping(path = "/fileManage")
 @Api(tags = "FileManage", description = "图片管理")
 public class FileController extends  BaseController{
@@ -37,28 +36,10 @@ public class FileController extends  BaseController{
     @Autowired
     private FileService fileService;
 
-//    @RequestMapping(path = "/getFiles",method = RequestMethod.POST)
-//    @ApiOperation(value = "获取图片列表" ,notes = "获取图片列表")
-//    @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
-//    public String getFiles(FileReqVo reqVo){
-//
-//        if(reqVo == null){
-//            return paramsError();
-//        }
-//
-//        logger.info("获取文件列表开始，参数：{}", JSON.toJSON(reqVo));
-//        try {
-//            List<FileInfo> result = fileService.getFiles(reqVo);
-//            return  queryOk(result);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return  error(null,OperateTypeEm.QUERY.toString());
-//        }
-//
-//    }
-
-    @RequestMapping(path = "/getFiles",method = RequestMethod.GET)
-    public String getFiles(FileReqVo reqVo, Model model){
+    @RequestMapping(path = "/getFiles",method = RequestMethod.POST)
+    @ApiOperation(value = "获取图片列表" ,notes = "获取图片列表")
+    @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
+    public String getFiles(FileReqVo reqVo){
 
         if(reqVo == null){
             return paramsError();
@@ -67,8 +48,27 @@ public class FileController extends  BaseController{
         logger.info("获取文件列表开始，参数：{}", JSON.toJSON(reqVo));
         try {
             List<FileInfo> result = fileService.getFiles(reqVo);
-            model.addAttribute(result);
-            return  "/fileManage/fileManage";
+            return  queryOk(result);
+        }catch (Exception e){
+            e.printStackTrace();
+            return  error(null,OperateTypeEm.QUERY.toString());
+        }
+
+    }
+
+    @RequestMapping(path = "/pages",method = RequestMethod.POST)
+    @ApiOperation(value = "获取图片列表" ,notes = "获取图片列表")
+    @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
+    public String pages(FileReqVo reqVo){
+
+        if(reqVo == null){
+            return paramsError();
+        }
+
+        logger.info("获取文件列表开始，参数：{}", JSON.toJSON(reqVo));
+        try {
+            PageInfo<FileInfo> result = fileService.pages(reqVo);
+            return  queryOk(result);
         }catch (Exception e){
             e.printStackTrace();
             return  error(null,OperateTypeEm.QUERY.toString());
@@ -80,7 +80,6 @@ public class FileController extends  BaseController{
     @ApiOperation(value = "增加或更新图片信息" ,notes = "增加或更新图片信息")
     @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
     public String addOrUpdateFile(FileReqVo reqVo){
-
         if(reqVo == null){
             return paramsError();
         }

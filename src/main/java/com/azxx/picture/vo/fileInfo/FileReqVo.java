@@ -1,7 +1,5 @@
 package com.azxx.picture.vo.fileInfo;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
@@ -54,6 +52,25 @@ public class FileReqVo {
 
     private Integer id;
 
+    private Integer page;
+
+    private Integer rows;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     public Integer getId() {
         return id;

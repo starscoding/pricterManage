@@ -45,10 +45,13 @@ spring:
             required : true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://47.101.138.153:3306/pictureManage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://47.101.138.153:3306/pictureManage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: ShouWang-!3!4
+#    password: ShouWang-!3!4
+    password: shouwang13
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
     cache: false
     enabled: true
@@ -56,6 +59,9 @@ spring:
     mode: "HTML5"
     prefix: "classpath:/templates/"
     suffix: ".html"
+  http:
+    encoding:
+      charset: UTF-8
 email :
   emailFrom : mr.xuzheng@foxmail.com
 
@@ -78,6 +84,6 @@ pagehelper:
 
 #swagger 开启关闭
 swagger:
-  enable: false
+  enable: true
 
 
