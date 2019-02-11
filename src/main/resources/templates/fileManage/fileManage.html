@@ -66,9 +66,9 @@
             },
 //            data: grid_data,
 //            datatype: "local",
-            colNames: ['ID', '名称', '标题', '大小', '类型', '分组ID', '分组名称', '访问URL', '创建时间', '记录时间', '描述','操作'],
+            colNames: ['ID', '名称', '标题', '大小', '类型', '分组ID', '分组名称', '访问URL', '创建时间', '记录时间', '描述', '操作',''],
             colModel: [
-                {name: 'id', index: 'id', width: 60, sorttype: "int",editable: true,edittype: 'text' },
+                {name: 'id', index: 'id', width: 60, sorttype: "int", editable: true, edittype: 'text'},
                 {
                     name: 'name',
                     index: 'name',
@@ -149,7 +149,17 @@
                         delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
                         editformbutton: true, editOptions: {recreateForm: true, beforeShowForm: beforeEditCallback}
                     }
+                },
+                {
+                    name: 'fileToUpload',
+                    index: 'fileToUpload',
+                    editoptions: {enctype: "multipart/form-data"},
+                    edittype: 'file',
+                    width: 150,
+                    align: "left",
+                    editable: true
                 }
+
             ],
 
             viewrecords: true,
@@ -259,8 +269,15 @@
 //                    $(formid).attr('action','');
 //                    $(formid).attr('enctype','multipart/form-data');
                 },
-                afterSubmit: function (response,postdata) {
-//                    alert('abc');
+                afterSubmit: function (response, postdata) {
+                    var res = $.parseJSON(response.responseText);
+                    console.log(res);
+                    if(res.code!=200) {
+                        return [false,res.msg];
+                    }
+                    else {
+                        return [true];
+                    }
 //                    console.info(response);
 //                    console.info(postdata);
 //                    $.ajaxFileUpload({
