@@ -32,7 +32,7 @@ spring:
     host : smtp.qq.com
 #    port : 465
     username : mr.xuzheng@foxmail.com
-    password : mdcbwhtrugjkbjaf
+    password : vjzpmjnzvpepbiij
     properties:
       mail:
         smtp:

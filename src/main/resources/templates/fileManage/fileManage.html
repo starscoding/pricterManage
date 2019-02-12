@@ -66,7 +66,7 @@
             },
 //            data: grid_data,
 //            datatype: "local",
-            colNames: ['ID', '名称', '标题', '大小', '类型', '分组ID', '分组名称', '访问URL', '创建时间', '记录时间', '描述', '操作',''],
+            colNames: ['ID', '名称', '标题', '大小', '类型', '分组ID', '分组名称', '访问URL', '创建时间', '记录时间', '描述', '操作', ''],
             colModel: [
                 {name: 'id', index: 'id', width: 60, sorttype: "int", editable: true, edittype: 'text'},
                 {
@@ -200,31 +200,6 @@
 
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
-
-
-        //enable search/filter toolbar
-        //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
-        //jQuery(grid_selector).filterToolbar({});
-
-
-        //switch element when editing inline
-        function aceSwitch(cellvalue, options, cell) {
-            setTimeout(function () {
-                $(cell).find('input[type=checkbox]')
-                    .addClass('ace ace-switch ace-switch-5')
-                    .after('<span class="lbl"></span>');
-            }, 0);
-        }
-
-        //enable datepicker
-        function pickDate(cellvalue, options, cell) {
-            setTimeout(function () {
-                $(cell).find('input[type=text]')
-                    .datepicker({format: 'yyyy-mm-dd', autoclose: true});
-            }, 0);
-        }
-
-
         //navButtons
         jQuery(grid_selector).jqGrid('navGrid', pager_selector,
             { 	//navbar options
@@ -265,30 +240,37 @@
 //                    style_edit_form(form);
                 },
                 onInitializeForm: function (formid) {
-//                    $(formid).attr('method','POST');
-//                    $(formid).attr('action','');
-//                    $(formid).attr('enctype','multipart/form-data');
+
+                   console.log($(grid_selector).jqGrid('getGridParam','editurl'));
+                   console.log($(grid_selector).jqGrid('setGridParam','editurl'));
+                   $(formid).attr('method','POST');
+                   $(formid).attr('action','');
+                   $(formid).attr('enctype','multipart/form-data');
                 },
                 afterSubmit: function (response, postdata) {
                     var res = $.parseJSON(response.responseText);
                     console.log(res);
-                    if(res.code!=200) {
-                        return [false,res.msg];
+                    console.log(postdata);
+                    $.ajaxFileUpload({
+                        url: './uploadFile',
+                        secureuri: false,
+                        fileElementId: 'fileToUpload',
+                        dataType: 'json',
+                        type:"post",
+                        success: function (data, status) {
+                            alert("Upload Complete.");
+                        },
+                        error: function (data, status, e)//服务器响应失败处理函数
+                        {
+                            alert(e);
+                        }
+                    });
+                    if (res.code != 200) {
+                        return [false, res.msg];
                     }
                     else {
                         return [true];
                     }
-//                    console.info(response);
-//                    console.info(postdata);
-//                    $.ajaxFileUpload({
-//                        url: './fileManage/addOrUpdateFile',
-//                        secureuri:false,
-//                        fileElementId:'file_to_upload',
-//                        dataType: 'json',
-//                        success: function (data, status) {
-//                            alert("Upload Complete.");
-//                        }
-//                    });
                 }
             },
             {

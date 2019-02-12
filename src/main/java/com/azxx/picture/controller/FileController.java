@@ -15,7 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -74,6 +76,14 @@ public class FileController extends  BaseController{
             return  error(null,OperateTypeEm.QUERY.toString());
         }
 
+    }
+
+    @RequestMapping(path = "/uploadFile",method = RequestMethod.POST)
+    @ApiOperation(value = "文件上传" ,notes = "文件上传")
+    @ApiResponses({ @ApiResponse(code = 200, message = "处理成功") })
+    public String uploadFile(@RequestParam("fileToUpload") MultipartFile file){
+        System.out.println(file.getOriginalFilename());
+        return  queryOk(null);
     }
 
     @RequestMapping(path = "/addOrUpdateFile",method = RequestMethod.POST)
