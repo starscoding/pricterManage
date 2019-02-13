@@ -1,7 +1,5 @@
 var grid_selector = "#grid-table";
 var pager_selector = "#grid-pager";
-var startTime = "";
-var endTime = "";
 var dateFormat = "YYYY-MM-DD HH:MM:SS";
 var addOrUpdateUrl = baseUrl + "/groupManage/addOrUpdate";
 var delUrl = baseUrl + "/groupManage/delete";
@@ -13,10 +11,7 @@ var groupManage = {
         $(grid_selector).jqGrid('clearGridData');  //清空表格
         $(grid_selector).jqGrid('setGridParam',{  // 重新加载数据
             postData : {
-                title: $("#title").val(),
-                startTime: startTime,
-                endTime: endTime,
-                groupName: $("#groupName").val()
+                name: $("#name").val()
             },   //  newdata 是符合格式要求的需要重新加载的数据
         }).trigger("reloadGrid");
     },
