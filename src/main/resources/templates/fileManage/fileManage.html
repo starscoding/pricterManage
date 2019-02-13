@@ -2,7 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:include="header :: header" th:with="title='xx'"></head>
-
+<style>
+    div.centered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        /*margin-top: -50px;*/
+        /*margin-left: -100px;*/
+    }
+</style>
 <body class="no-skin" style="background-color:Transparent;">
 
 <div class="row">
@@ -46,7 +54,7 @@
             },
             colNames: ['ID', '名称', '标题', '大小', '类型', '分组ID', '分组名称', '访问URL', '创建时间', '记录时间', '描述', '操作', ''],
             colModel: [
-                {name: 'id', index: 'id', width: 60, sorttype: "int", editable: true, edittype: 'text'},
+                {name: 'id', index: 'id', width: 60, sorttype: "int", editable: true, edittype: 'text', hidden: true},
                 {
                     name: 'name',
                     index: 'name',
@@ -114,7 +122,7 @@
                     formatoptions: {
                         keys: true,
                         delbutton: true,//disable delete button
-                        delOptions: {recreateForm: true,  beforeShowForm: beforeDeleteCallback},
+                        delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
                         editformbutton: true,
                         editOptions: {recreateForm: true, closeAfterEdit: true, beforeShowForm: beforeEditCallback}
                     }
@@ -130,16 +138,18 @@
             ],
             viewrecords: true,
             height: 500,
-            rowNum: 1,
-            rowList: [1, 2, 3],
+            rowNum: 15,
+            rowList: [15, 30, 50],
             pager: pager_selector,
             altRows: false,
             multiselect: true,
             multiboxonly: true,
+            rownumbers: true,
             editurl: baseUrl + "/fileManage/addOrUpdateFile",//nothing is saved
             loadComplete: function () {
                 var table = this;
                 setTimeout(function () {
+                    $(grid_selector).jqGrid('setLabel', 'rn', '序号', {'text-align': 'left'}, '');
                     styleCheckbox(table);
                     updateActionIcons(table);
                     updatePagerIcons(table);
@@ -172,6 +182,8 @@
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                     style_edit_form(form);
+                    $("#editmodgrid-table").css("top","20%");
+                    $("#editmodgrid-table").css("left","40%");
                 }
             },
             {
@@ -237,11 +249,11 @@
                 beforeShowForm: function (e) {
                     var delUrl = baseUrl + "/fileManage/deleteFile";
                     $(grid_selector).jqGrid('setGridParam', {editurl: delUrl});
-                    // var form = $(e[0]);
-                    // if (form.data('styled')) return false;
-                    // form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                    // style_delete_form(form);
-                    // form.data('styled', true);
+                    var form = $(e[0]);
+                    if (form.data('styled')) return false;
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                    style_delete_form(form);
+                    form.data('styled', true);
                 },
                 onClick: function (e) {
                     alert(1);

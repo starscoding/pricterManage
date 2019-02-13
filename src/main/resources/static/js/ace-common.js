@@ -48,16 +48,16 @@ function updateActionIcons(table) {
 //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
 //or go back to default browser checkbox styles for the grid
 function styleCheckbox(table) {
-    /**
-     $(table).find('input:checkbox').addClass('ace')
-     .wrap('<label />')
-     .after('<span class="lbl align-top" />')
 
+     // $(table).find('input:checkbox').addClass('ace')
+     // .wrap('<label />')
+     // .after('<span class="lbl align-top" />')
+     //
+     //
+     // $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
+     // .find('input.cbox[type=checkbox]').addClass('ace')
+     // .wrap('<label />').after('<span class="lbl align-top" />');
 
-     $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
-     .find('input.cbox[type=checkbox]').addClass('ace')
-     .wrap('<label />').after('<span class="lbl align-top" />');
-     */
 }
 
 function style_edit_form(form) {
