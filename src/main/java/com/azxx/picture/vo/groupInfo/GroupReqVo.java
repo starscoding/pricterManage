@@ -12,28 +12,48 @@ import io.swagger.annotations.ApiModelProperty;
 public class GroupReqVo {
 
     @ApiModelProperty(value = "分组描述",dataType = "string")
-    private String desc;
+    private String description;
 
     @ApiModelProperty(value = "分组名称",dataType = "string")
     private String name;
 
     @ApiModelProperty(value = "ID",dataType = "int")
-    private String id;
+    private Integer id;
 
-    public String getId() {
+    private Integer page;
+
+    private Integer rows;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {

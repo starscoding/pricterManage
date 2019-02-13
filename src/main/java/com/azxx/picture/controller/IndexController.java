@@ -28,4 +28,9 @@ public class IndexController {
     public String fileManage(){
         return  "/fileManage/fileManage";
     }
+
+    @RequestMapping(path = "/groupManage/index",method = RequestMethod.GET)
+    public String groupManage(){
+        return  "/groupManage/groupManage";
+    }
 }

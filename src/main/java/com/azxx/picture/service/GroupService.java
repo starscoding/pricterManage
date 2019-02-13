@@ -4,12 +4,15 @@ import com.azxx.picture.entity.FileInfo;
 import com.azxx.picture.entity.GroupInfo;
 import com.azxx.picture.mapper.GroupInfoMapper;
 import com.azxx.picture.vo.groupInfo.GroupReqVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +39,12 @@ public class GroupService {
         return groupInfoMapper.select(groupInfo);
     }
 
+    public PageInfo<GroupInfo> pages(GroupReqVo reqVo){
+        GroupInfo groupInfo = new GroupInfo();
+        BeanUtils.copyProperties(reqVo,groupInfo);
+        return PageHelper.startPage(reqVo.getPage(), reqVo.getRows()).doSelectPageInfo(() -> groupInfoMapper.select(groupInfo));
+    }
+
     public boolean addOrUpdateGroup(GroupReqVo reqVo){
         int effectRows = 0;
         if(reqVo == null) {
@@ -43,7 +52,8 @@ public class GroupService {
         }
         GroupInfo groupInfo = new GroupInfo();
         BeanUtils.copyProperties(reqVo,groupInfo);
-        if(reqVo.getId()==null){
+        groupInfo.setRecordTime(new Date());
+        if(reqVo.getId()==null || reqVo.getId() == 0){
             effectRows = groupInfoMapper.insert(groupInfo);
         }else{
             effectRows = groupInfoMapper.updateByPrimaryKeySelective(groupInfo);
