@@ -24,43 +24,40 @@ public class FileService {
     @Autowired
     private FileInfoMapper fileInfoMapper;
 
-    public List<FileInfo> getFiles(FileReqVo reqVo){
+    public List<FileInfo> getFiles(FileReqVo reqVo) {
         List<FileInfo> result = null;
-        if(reqVo == null){
+        if (reqVo == null) {
             return result;
         }
         return fileInfoMapper.getFiles(reqVo);
     }
 
-    public PageInfo<FileInfo> pages(FileReqVo reqVo){
-        PageHelper.startPage(reqVo.getPage(),reqVo.getRows());
-        List<FileInfo> result =  fileInfoMapper.getFiles(reqVo);
-        PageInfo<FileInfo>  pageInfo = new PageInfo<>(result);
-        return pageInfo;
+    public PageInfo<FileInfo> pages(FileReqVo reqVo) {
+        return PageHelper.startPage(reqVo.getPage(), reqVo.getRows()).doSelectPageInfo(() -> fileInfoMapper.getFiles(reqVo));
     }
 
-    public Boolean addOrUpdateFile(FileReqVo reqVo){
+    public Boolean addOrUpdateFile(FileReqVo reqVo) {
         int effectRows = 0;
-        if(reqVo == null) {
+        if (reqVo == null) {
             return false;
         }
         FileInfo fileInfo = new FileInfo();
-        BeanUtils.copyProperties(reqVo,fileInfo);
-        if(reqVo.getId()==null){
+        BeanUtils.copyProperties(reqVo, fileInfo);
+        if (reqVo.getId() == null) {
             effectRows = fileInfoMapper.insert(fileInfo);
-        }else{
+        } else {
             effectRows = fileInfoMapper.updateByPrimaryKeySelective(fileInfo);
         }
-        return effectRows>0?true:false;
+        return effectRows > 0 ? true : false;
     }
 
-    public boolean deleteFile(Integer id){
+    public boolean deleteFile(Integer id) {
         int effectRows = 0;
-        if(id == null) {
+        if (id == null) {
             return false;
         }
         effectRows = fileInfoMapper.deleteByPrimaryKey(id);
-        return effectRows>0?true:false;
+        return effectRows > 0 ? true : false;
     }
 
 }
