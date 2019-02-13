@@ -12,6 +12,7 @@ public class FileInfo  {
      *
      * @mbggenerated
      */
+    @Id
     private Integer id;
 
     /**

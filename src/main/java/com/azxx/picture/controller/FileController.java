@@ -107,15 +107,13 @@ public class FileController extends  BaseController{
     @RequestMapping(path = "/deleteFile",method = RequestMethod.POST)
     @ApiOperation(value = "删除图片信息" ,notes = "删除图片信息")
     @ApiResponses({ @ApiResponse(code = 200, message = "处理成功", response = FileInfo.class) })
-    public String deleteFile(Integer fileId){
-
-        if(fileId == null){
+    public String deleteFile(Integer id){
+        if(id == null){
             return paramsError();
         }
-
-        logger.info("删除图片信息，参数：{}", fileId);
+        logger.info("删除图片信息，参数：{}", id);
         try{
-            fileService.deleteFile(fileId);
+            fileService.deleteFile(id);
             return updateOk(null);
         }catch (Exception e){
             e.printStackTrace();
