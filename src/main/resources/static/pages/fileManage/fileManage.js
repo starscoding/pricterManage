@@ -115,7 +115,8 @@ var fileManage = {
                 }
             ],
             viewrecords: true,
-            height: 'auto',
+            // height: 'auto',
+            height: 500,
             rowNum: 15,
             rowList: [15, 30, 50],
             pager: pager_selector,
@@ -172,6 +173,8 @@ var fileManage = {
                 beforeShowForm: function (e) {
                     $("#editmodgrid-table").css("top","20%");
                     $("#editmodgrid-table").css("left","40%");
+                    // $(grid_selector).setGridParam().hideCol("fileToUpload").trigger("reloadGrid");
+                    // $(grid_selector).setGridParam().showCol("fileToUpload").trigger("reloadGrid");
 //                    var form = $(e[0]);
 //                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
 //                        .wrapInner('<div class="widget-header" />')
@@ -181,6 +184,7 @@ var fileManage = {
                     var addUrl = baseUrl + "/fileManage/addOrUpdateFile";
                     // console.log($(grid_selector).jqGrid('getGridParam', 'editurl'));
                     $(grid_selector).jqGrid('setGridParam', {editurl: addUrl});
+                    $("#tr_fileToUpload").css("display","");
                     // $(formid).attr('method', 'POST');
                     // $(formid).attr('action', '');
                     // $(formid).attr('enctype', 'multipart/form-data');
