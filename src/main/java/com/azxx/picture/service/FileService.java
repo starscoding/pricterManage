@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +45,8 @@ public class FileService {
         FileInfo fileInfo = new FileInfo();
         BeanUtils.copyProperties(reqVo, fileInfo);
         if (reqVo.getId() == null) {
+            fileInfo.setRecordTime(new Date());
+            fileInfo.setCreateTime(new Date());
             effectRows = fileInfoMapper.insert(fileInfo);
         } else {
             effectRows = fileInfoMapper.updateByPrimaryKeySelective(fileInfo);

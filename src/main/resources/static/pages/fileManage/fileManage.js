@@ -75,8 +75,8 @@ var fileManage = {
                     width: 100,
                     editable: false
                 }, {
-                    name: 'creatTime',
-                    index: 'creatTime',
+                    name: 'createTime',
+                    index: 'createTime',
                     width: 100,
                     sortable: false,
                     editable: false
@@ -106,6 +106,7 @@ var fileManage = {
                 }, {
                     name: 'fileToUpload',
                     index: 'fileToUpload',
+                    hidden: true,
                     editoptions: {enctype: "multipart/form-data"},
                     edittype: 'file',
                     width: 150,
@@ -114,7 +115,7 @@ var fileManage = {
                 }
             ],
             viewrecords: true,
-            height: 500,
+            height: 'auto',
             rowNum: 15,
             rowList: [15, 30, 50],
             pager: pager_selector,
@@ -169,6 +170,8 @@ var fileManage = {
                 recreateForm: true,
                 viewPagerButtons: true,
                 beforeShowForm: function (e) {
+                    $("#editmodgrid-table").css("top","20%");
+                    $("#editmodgrid-table").css("left","40%");
 //                    var form = $(e[0]);
 //                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
 //                        .wrapInner('<div class="widget-header" />')
