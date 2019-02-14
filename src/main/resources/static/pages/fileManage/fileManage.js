@@ -17,6 +17,32 @@ var fileManage = {
             },   //  newdata 是符合格式要求的需要重新加载的数据
         }).trigger("reloadGrid");
     },
+    initGroup: function(){
+        $.ajax({
+            url:  baseUrl + "/groupManage/getGroups",
+            type: "POST",
+            data: {},
+            success: function (response) {
+                var data = $.parseJSON(response);
+                if (data.code == 200) {
+                    if(data.data !=null && data.data.length>0){
+                        $("#groupName").empty();
+                        for (var i = 0;i<data.data.length;i++) {
+                            var tmp = data.data[i];
+                            $("#groupName").append("<option value='"+tmp.id+"'>"+tmp.name+"</option>")
+                        }
+
+                    }
+                }
+                if (data.status == "error") {
+                    alert(data.msg);
+                }
+            },
+            error: function () {
+                alert("请求失败！");
+            }
+        });
+    },
     initGridData: function () {
         var self = this;
         jQuery(grid_selector).jqGrid({
@@ -216,7 +242,6 @@ var fileManage = {
                 //delete record form
                 recreateForm: true,
                 onInitializeForm: function (formid) {
-                    alert();
                     var delUrl = baseUrl + "/fileManage/deleteFile";
                     $(grid_selector).jqGrid('setGridParam', {editurl: delUrl});
                 },
@@ -355,6 +380,7 @@ var fileManage = {
         });
     },
     init: function () {
+        this.initGroup();
         this.initDatePicker();
         this.initGirdAutoWidth();
         this.initGridData();
