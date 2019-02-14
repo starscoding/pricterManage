@@ -33,4 +33,9 @@ public class IndexController {
     public String groupManage(){
         return  "/groupManage/groupManage";
     }
+
+    @RequestMapping(path = "/welcome/index",method = RequestMethod.GET)
+    public String welcome(){
+        return  "/welcome/welcome";
+    }
 }
