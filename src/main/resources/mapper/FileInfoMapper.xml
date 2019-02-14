@@ -28,40 +28,40 @@
     from
       file_info
     where 1=1
-      <if test="name != null" >
+      <if test="name != null and name !=''" >
         and name = #{name,jdbcType=VARCHAR}
       </if>
-      <if test="title != null" >
+      <if test="title != null and title !=''" >
         and title = #{title,jdbcType=VARCHAR}
       </if>
-      <if test="description != null" >
+      <if test="description != null and description !=''" >
         and desc = #{description,jdbcType=VARCHAR}
       </if>
-      <if test="size != null" >
+      <if test="size != null and size !=''" >
         and size = #{size,jdbcType=INTEGER}
       </if>
-      <if test="type != null" >
+      <if test="type != null and type !=''" >
         and type = #{type,jdbcType=VARCHAR}
       </if>
-      <if test="groupId != null" >
+      <if test="groupId != null and groupId !=''" >
         and group_id = #{groupId,jdbcType=INTEGER}
       </if>
-      <if test="groupName != null" >
+      <if test="groupName != null and groupName !=''" >
         and group_name = #{groupName,jdbcType=VARCHAR}
       </if>
-      <if test="url != null" >
+      <if test="url != null and url !=''" >
         and url = #{url,jdbcType=VARCHAR}
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null and createTime !=''" >
         and create_time = #{createTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="recordTime != null" >
+      <if test="recordTime != null and recordTime !=''" >
         and record_time = #{recordTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="startTime != null" >
+      <if test="startTime != null and startTime !=''" >
         <![CDATA[ and create_time >=  #{startTime} ]]>
       </if>
-      <if test="endTime != null" >
+      <if test="endTime != null and endTime !=''" >
         <![CDATA[ and create_time <=  #{endTime} ]]>
       </if>
   </select>

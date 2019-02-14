@@ -3,7 +3,7 @@ var pager_selector = "#grid-pager";
 var startTime = "";
 var endTime = "";
 var dateFormat = "YYYY-MM-DD HH:MM:SS";
-
+var options = "";
 
 var fileManage = {
     query: function () {
@@ -18,6 +18,7 @@ var fileManage = {
         }).trigger("reloadGrid");
     },
     initGroup: function(){
+        var self = this;
         $.ajax({
             url:  baseUrl + "/groupManage/getGroups",
             type: "POST",
@@ -27,11 +28,13 @@ var fileManage = {
                 if (data.code == 200) {
                     if(data.data !=null && data.data.length>0){
                         $("#groupName").empty();
+                        $("#groupName").append("<option value=''>全部</option>");
                         for (var i = 0;i<data.data.length;i++) {
                             var tmp = data.data[i];
-                            $("#groupName").append("<option value='"+tmp.id+"'>"+tmp.name+"</option>")
+                            $("#groupName").append("<option value='"+tmp.name+"'>"+tmp.name+"</option>");
+                            options = options+tmp.name+":"+tmp.name+";";
                         }
-
+                        self.initGridData();
                     }
                 }
                 if (data.status == "error") {
@@ -95,7 +98,7 @@ var fileManage = {
                     width: 50,
                     editable: true,
                     edittype: "select",
-                    editoptions: {value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}
+                    editoptions: {value: options}
                 }, {
                     name: 'url',
                     index: 'url',
@@ -383,7 +386,7 @@ var fileManage = {
         this.initGroup();
         this.initDatePicker();
         this.initGirdAutoWidth();
-        this.initGridData();
+        // this.initGridData();
     }
 
 }
