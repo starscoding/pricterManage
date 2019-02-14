@@ -47,7 +47,12 @@ var groupManage = {
                     name: 'recordTime',
                     index: 'recordTime',
                     width: 70,
-                    editable: false
+                    editable: false,
+                    formatter: function (cellvalue, options, rowObject) {
+                        var date = new Date();
+                        date.setTime(cellvalue);
+                        return date.Format("yyyy-MM-dd HH:mm:ss");
+                    }
                 }
             ],
             viewrecords: true,

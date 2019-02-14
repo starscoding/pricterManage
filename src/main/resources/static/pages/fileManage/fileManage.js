@@ -43,19 +43,19 @@ var fileManage = {
                 }, {
                     name: 'title',
                     index: 'title',
-                    width: 150,
+                    width: 100,
                     editable: true,
                     edittype: "text",
                     editoptions: {size: "20", maxlength: "100"}
                 }, {
                     name: 'size',
                     index: 'size',
-                    width: 70,
+                    width: 30,
                     editable: false
                 }, {
                     name: 'type',
                     index: 'type',
-                    width: 50,
+                    width: 30,
                     editable: false
                 }, {
                     name: 'groupId',
@@ -66,27 +66,37 @@ var fileManage = {
                 }, {
                     name: 'groupName',
                     index: 'groupName',
-                    width: 100,
+                    width: 50,
                     editable: true,
                     edittype: "select",
                     editoptions: {value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}
                 }, {
                     name: 'url',
                     index: 'url',
-                    width: 100,
+                    width: 200,
                     editable: false
                 }, {
                     name: 'createTime',
                     index: 'createTime',
-                    width: 100,
+                    width: 80,
                     sortable: false,
-                    editable: false
+                    editable: false,
+                    formatter: function (cellvalue, options, rowObject) {
+                        var date = new Date();
+                        date.setTime(cellvalue);
+                        return date.Format("yyyy-MM-dd HH:mm:ss");
+                    }
                 }, {
                     name: 'recordTime',
                     index: 'recordTime',
-                    width: 100,
+                    width: 80,
                     sortable: false,
-                    editable: false
+                    editable: false,
+                    formatter: function (cellvalue, options, rowObject) {
+                        var date = new Date();
+                        date.setTime(cellvalue);
+                        return date.Format("yyyy-MM-dd HH:mm:ss");
+                    }
                 }, {
                     name: 'description',
                     index: 'description',
