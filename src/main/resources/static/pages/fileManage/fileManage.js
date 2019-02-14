@@ -6,10 +6,10 @@ var dateFormat = "YYYY-MM-DD HH:MM:SS";
 
 
 var fileManage = {
-    query: function(){
+    query: function () {
         $(grid_selector).jqGrid('clearGridData');  //清空表格
-        $(grid_selector).jqGrid('setGridParam',{  // 重新加载数据
-            postData : {
+        $(grid_selector).jqGrid('setGridParam', {  // 重新加载数据
+            postData: {
                 title: $("#title").val(),
                 startTime: startTime,
                 endTime: endTime,
@@ -17,7 +17,8 @@ var fileManage = {
             },   //  newdata 是符合格式要求的需要重新加载的数据
         }).trigger("reloadGrid");
     },
-    initGridData: function(){
+    initGridData: function () {
+        var self = this;
         jQuery(grid_selector).jqGrid({
             url: baseUrl + "/fileManage/pages",
             datatype: "json",
@@ -109,6 +110,7 @@ var fileManage = {
                     hidden: true,
                     editoptions: {enctype: "multipart/form-data"},
                     edittype: 'file',
+                    // formatter: this.showPicture,
                     width: 150,
                     align: "left",
                     editable: true
@@ -161,8 +163,8 @@ var fileManage = {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                     style_edit_form(form);
-                    $("#editmodgrid-table").css("top","20%");
-                    $("#editmodgrid-table").css("left","40%");
+                    $("#editmodgrid-table").css("top", "20%");
+                    $("#editmodgrid-table").css("left", "40%");
                 }
             },
             {
@@ -171,8 +173,8 @@ var fileManage = {
                 recreateForm: true,
                 viewPagerButtons: true,
                 beforeShowForm: function (e) {
-                    $("#editmodgrid-table").css("top","20%");
-                    $("#editmodgrid-table").css("left","40%");
+                    $("#editmodgrid-table").css("top", "20%");
+                    $("#editmodgrid-table").css("left", "40%");
                     // $(grid_selector).setGridParam().hideCol("fileToUpload").trigger("reloadGrid");
                     // $(grid_selector).setGridParam().showCol("fileToUpload").trigger("reloadGrid");
 //                    var form = $(e[0]);
@@ -184,40 +186,18 @@ var fileManage = {
                     var addUrl = baseUrl + "/fileManage/addOrUpdateFile";
                     // console.log($(grid_selector).jqGrid('getGridParam', 'editurl'));
                     $(grid_selector).jqGrid('setGridParam', {editurl: addUrl});
-                    $("#tr_fileToUpload").css("display","");
+                    $("#tr_fileToUpload").css("display", "");
+                    // console.log(formid);
                     // $(formid).attr('method', 'POST');
-                    // $(formid).attr('action', '');
+                    // $(formid).attr('action', '/abc');
                     // $(formid).attr('enctype', 'multipart/form-data');
                 },
                 afterSubmit: function (response, postdata) {
                     var res = $.parseJSON(response.responseText);
-                    console.log(res);
-                    console.log(postdata);
-                    var formData = new FormData();
-                    formData.append("fileToUpload", document.getElementById("fileToUpload").files[0]);
-                    $.ajax({
-                        url: './uploadFile',
-                        type: "POST",
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            console.log(">>>" + data);
-                            if (data.status == "true") {
-                                alert("上传成功！");
-                            }
-                            if (data.status == "error") {
-                                alert(data.msg);
-                            }
-                        },
-                        error: function () {
-                            alert("上传失败！");
-                        }
-                    });
                     if (res.code != 200) {
                         return [false, res.msg];
-                    }
-                    else {
+                    } else {
+                        self.uploadFile(postdata);
                         return [true];
                     }
                 }
@@ -284,7 +264,40 @@ var fileManage = {
             $(grid_selector).jqGrid('setGridParam', {editurl: addUrl});
         }
     },
-    initGirdAutoWidth: function(){
+    uploadFile : function(postdata){
+        var formData = new FormData();
+        formData.append("fileToUpload", document.getElementById("fileToUpload").files[0]);
+        formData.append("name",postdata.name);
+        formData.append("title",postdata.title);
+        formData.append("groupName",postdata.groupName);
+        formData.append("description",postdata.description);
+        $.ajax({
+            url: './uploadFile',
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(">>>" + data);
+                if (data.status == "true") {
+                    alert("上传成功！");
+                    $(grid_selector).jqGrid('clearGridData');  //清空表格
+                    $(grid_selector).jqGrid('setGridParam',{}).trigger("reloadGrid");
+                }
+                if (data.status == "error") {
+                    alert(data.msg);
+                }
+            },
+            error: function () {
+                alert("上传失败！");
+            }
+        });
+    },
+    showPicture: function (cellvalue, options, rowObject) {
+        // console.log("cellvalue:"+cellvalue);
+        // return "<img src='" + cellvalue + "' height='50' width='50' />";
+    },
+    initGirdAutoWidth: function () {
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
@@ -300,7 +313,7 @@ var fileManage = {
             }
         })
     },
-    initDatePicker: function(){
+    initDatePicker: function () {
         $("#timeRange").val("请选择日期");
         $('input[name=date-range-picker]').daterangepicker({
             'applyClass': 'btn-sm btn-success',

@@ -66,4 +66,14 @@
       </if>
   </select>
 
+  <select id="getFileByName" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    file_info
+    where 1=1
+      and name = #{name,jdbcType=VARCHAR}
+    limit 1
+  </select>
+
 </mapper>

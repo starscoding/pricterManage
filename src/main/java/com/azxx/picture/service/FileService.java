@@ -5,6 +5,7 @@ import com.azxx.picture.mapper.FileInfoMapper;
 import com.azxx.picture.vo.fileInfo.FileReqVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +43,17 @@ public class FileService {
         if (reqVo == null) {
             return false;
         }
-        FileInfo fileInfo = new FileInfo();
+        if(StringUtils.isBlank(reqVo.getName())){
+            return false;
+        }
+        FileInfo fileInfo = fileInfoMapper.getFileByName(reqVo.getName());
+        if(fileInfo==null ){
+            fileInfo = new FileInfo();
+        }
+        Integer id = fileInfo.getId();
         BeanUtils.copyProperties(reqVo, fileInfo);
-        if (reqVo.getId() == null) {
+        fileInfo.setId(id);
+        if (fileInfo.getId() == null) {
             fileInfo.setRecordTime(new Date());
             fileInfo.setCreateTime(new Date());
             effectRows = fileInfoMapper.insert(fileInfo);
@@ -54,12 +63,15 @@ public class FileService {
         return effectRows > 0 ? true : false;
     }
 
-    public boolean deleteFile(Integer id) {
+    public boolean deleteFile(String ids) {
         int effectRows = 0;
-        if (id == null) {
+        if (StringUtils.isBlank(ids)) {
             return false;
         }
-        effectRows = fileInfoMapper.deleteByPrimaryKey(id);
+        String[] idArray = ids.split(",");
+        for (int i = 0; i < idArray.length; i++) {
+            effectRows = effectRows+fileInfoMapper.deleteByPrimaryKey(Integer.parseInt(idArray[i]));
+        }
         return effectRows > 0 ? true : false;
     }
 

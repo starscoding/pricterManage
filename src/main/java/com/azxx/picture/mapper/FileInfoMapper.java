@@ -12,4 +12,6 @@ public interface FileInfoMapper extends BaseMapper<FileInfo> {
 
     List<FileInfo> getFiles(FileReqVo reqVo);
 
+    FileInfo getFileByName(String name);
+
 }

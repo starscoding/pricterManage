@@ -86,4 +86,7 @@ pagehelper:
 swagger:
   enable: true
 
+img:
+  dir: D:/newcoding/pricterManage/src/main/resources/static/customer/img/
+  url: localhost:8088/
 
