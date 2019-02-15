@@ -91,5 +91,5 @@ swagger:
 #图片上传与访问路径配置
 img:
   dir: /usr/local/xuzheng/picture/
-  url: http://localhost:9209/picture/
+  url: http://www.isspark.com:9209/picture/
 

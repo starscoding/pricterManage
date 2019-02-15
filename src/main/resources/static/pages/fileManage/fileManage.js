@@ -18,7 +18,7 @@ var fileManage = {
     },
 
     getSelect: function(){
-        var options;
+        var options = "";
         $.ajax({
             url:  baseUrl + "/groupManage/getGroups",
             type: "POST",
