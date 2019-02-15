@@ -183,8 +183,8 @@ var fileManage = {
                 }
             ],
             viewrecords: true,
-            // height: 'auto',
-            height: 500,
+            height: 'auto',
+            // height: 500,
             rowNum: 15,
             rowList: [15, 30, 50],
             pager: pager_selector,

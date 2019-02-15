@@ -153,14 +153,14 @@
             </div>
 
             <div class="page-content" style="overflow: hidden;">
-                <iframe name="mainFrame" id="mainFrame" src="/welcome/index" frameborder="false" scrolling="no"  width="100%" height="100%" allowtransparency="true" onload="setIframeHeight(this)"></iframe>
+                <iframe name="mainFrame" id="mainFrame" src="/welcome/index" frameborder="0" scrolling="no"  width="100%" height="100%" allowtransparency="true" onload="setIframeHeight(this)"></iframe>
             </div>
         </div>
     </div><!-- /.main-content -->
 
     <div class="footer">
         <div class="footer-inner">
-            <div class="footer-content">
+            <div class="footer-content" id="footer">
                 <span class="bigger-120">
                     <span class="blue bolder">Mr.xuzheng &copy; 2019</span>
                 </span>
@@ -183,12 +183,16 @@
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     function setIframeHeight(iframe){
-        if(iframe){
-            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-            if(iframeWin.document.body){
-                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-            }
-        }
+        // alert($("#main-container").height());
+        // iframe.height = $("#main-container").height();
+        // alert(document.body.clientWidth);
+        iframe.height = $(window).height()-$("#navbar").height()-$("#breadcrumbs").height()-$("#footer").height()-80;
+        // if(iframe){
+        //     var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        //     if(iframeWin.document.body){
+        //         iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+        //     }
+        // }
     }
 
     function setActive(activeId) {

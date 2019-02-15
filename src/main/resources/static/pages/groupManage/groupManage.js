@@ -56,7 +56,8 @@ var groupManage = {
                 }
             ],
             viewrecords: true,
-            height: 500,
+            // height: 500,
+            height: 'auto',
             rowNum: 15,
             rowList: [15, 30, 50],
             pager: pager_selector,
