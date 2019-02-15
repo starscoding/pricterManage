@@ -88,5 +88,5 @@ swagger:
 
 img:
   dir: D:/newcoding/pricterManage/src/main/resources/static/customer/img/
-  url: localhost:8088/
+  url: http://localhost:8088/
 

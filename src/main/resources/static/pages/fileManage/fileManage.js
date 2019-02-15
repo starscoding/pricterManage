@@ -234,7 +234,9 @@ var fileManage = {
                 afterSubmit: function (response, postdata) {
                     var res = $.parseJSON(response.responseText);
                     if (res.code != 200) {
-                        return [false, res.msg];
+                        self.uploadFile(postdata);
+                        return [true];
+                        // return [false, res.msg];
                     } else {
                         self.uploadFile(postdata);
                         return [true];
@@ -316,11 +318,10 @@ var fileManage = {
             contentType: false,
             processData: false,
             success: function (data) {
+                $("#queryBtn").click();
                 console.log(">>>" + data);
                 if (data.status == "true") {
                     alert("上传成功！");
-                    $(grid_selector).jqGrid('clearGridData');  //清空表格
-                    $(grid_selector).jqGrid('setGridParam',{}).trigger("reloadGrid");
                 }
                 if (data.status == "error") {
                     alert(data.msg);
