@@ -38,4 +38,9 @@ public class IndexController {
     public String welcome(){
         return  "/welcome/welcome";
     }
+
+    @RequestMapping(path = "/main",method = RequestMethod.GET)
+    public String main(){
+        return  "/main";
+    }
 }
