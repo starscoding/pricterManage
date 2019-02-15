@@ -208,6 +208,9 @@ var groupManage = {
         })
     },
     init: function () {
+        $(document.body).css({
+            "overflow-x":"hidden"
+        });
         this.initGirdAutoWidth();
         this.initGridData();
     }

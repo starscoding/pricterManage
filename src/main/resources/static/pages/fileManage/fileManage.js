@@ -184,6 +184,7 @@ var fileManage = {
             ],
             viewrecords: true,
             height: 'auto',
+            width: 'auto',
             // height: 500,
             rowNum: 15,
             rowList: [15, 30, 50],
@@ -411,6 +412,9 @@ var fileManage = {
         });
     },
     init: function () {
+        $(document.body).css({
+            "overflow-x":"hidden"
+        });
         this.initGroup();
         this.initDatePicker();
         this.initGirdAutoWidth();
