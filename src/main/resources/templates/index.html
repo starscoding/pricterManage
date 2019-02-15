@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:include="header :: header" th:with="title='xx'" ></head>
+<head th:include="/header" th:with="title='xx'" ></head>
 
 <body class="no-skin">
 <div id="navbar" class="navbar navbar-default          ace-save-state">
@@ -178,7 +178,7 @@
     </a>
 </div><!-- /.main-container -->
 
-<head th:include="footer :: footer"></head>
+<head th:include="/footer"></head>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">

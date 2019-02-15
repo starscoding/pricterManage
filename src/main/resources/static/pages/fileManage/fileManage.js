@@ -3,7 +3,6 @@ var pager_selector = "#grid-pager";
 var startTime = "";
 var endTime = "";
 var dateFormat = "YYYY-MM-DD HH:MM:SS";
-var options = "";
 
 var fileManage = {
     query: function () {
@@ -16,6 +15,36 @@ var fileManage = {
                 groupName: $("#groupName").val()
             },   //  newdata 是符合格式要求的需要重新加载的数据
         }).trigger("reloadGrid");
+    },
+
+    getSelect: function(){
+        var options;
+        $.ajax({
+            url:  baseUrl + "/groupManage/getGroups",
+            type: "POST",
+            async: false,
+            data: {},
+            success: function (response) {
+                var data = $.parseJSON(response);
+                if (data.code == 200) {
+                    if(data.data !=null && data.data.length>0){
+                        for (var i = 0;i<data.data.length;i++){
+                            var tmp = data.data[i];
+                            if(i != data.data.length - 1){
+                                options  += tmp.name + ":" + tmp.name+ ";";
+                            }else{
+                                options  += tmp.name + ":" + tmp.name;
+                            }
+
+                        }
+
+                    }else{
+                        options  += "无:无";
+                    }
+                }
+            }
+        });
+        return options;
     },
     initGroup: function(){
         var self = this;
@@ -32,9 +61,7 @@ var fileManage = {
                         for (var i = 0;i<data.data.length;i++) {
                             var tmp = data.data[i];
                             $("#groupName").append("<option value='"+tmp.name+"'>"+tmp.name+"</option>");
-                            options = options+tmp.name+":"+tmp.name+";";
                         }
-                        self.initGridData();
                     }
                 }
                 if (data.status == "error") {
@@ -98,7 +125,7 @@ var fileManage = {
                     width: 50,
                     editable: true,
                     edittype: "select",
-                    editoptions: {value: options}
+                    editoptions: {value: self.getSelect()}
                 }, {
                     name: 'url',
                     index: 'url',
@@ -387,7 +414,7 @@ var fileManage = {
         this.initGroup();
         this.initDatePicker();
         this.initGirdAutoWidth();
-        // this.initGridData();
+        this.initGridData();
     }
 
 }

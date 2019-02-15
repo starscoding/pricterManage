@@ -45,11 +45,11 @@ spring:
             required : true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-#    url: jdbc:mysql://47.101.138.153:3306/pictureManage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-    url: jdbc:mysql://localhost:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://47.101.138.153:3306/pictureManage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://localhost:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-#    password: ShouWang-!3!4
-    password: shouwang13
+    password: ShouWang-!3!4
+#    password: shouwang13
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
@@ -57,8 +57,10 @@ spring:
     enabled: true
     encoding: "utf-8"
     mode: "HTML5"
-    prefix: "classpath:/templates/"
+    prefix: "classpath:/templates"
     suffix: ".html"
+    servlet:
+      content-type: "text/html"
   http:
     encoding:
       charset: UTF-8
@@ -86,7 +88,8 @@ pagehelper:
 swagger:
   enable: true
 
+#图片上传与访问路径配置
 img:
-  dir: D:/newcoding/pricterManage/src/main/resources/picture/
+  dir: /usr/local/xuzheng/picture/
   url: http://localhost:9209/picture/
 

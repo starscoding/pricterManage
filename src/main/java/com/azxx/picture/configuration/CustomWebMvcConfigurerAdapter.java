@@ -1,5 +1,6 @@
 package com.azxx.picture.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -21,6 +22,9 @@ import java.util.List;
 @Configuration
 public class CustomWebMvcConfigurerAdapter implements WebMvcConfigurer {
 
+    @Value("${img.dir}")
+    private String localpath;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //将templates目录下的CSS、JS文件映射为静态资源，防止Spring把这些资源识别成thymeleaf模版
@@ -28,11 +32,9 @@ public class CustomWebMvcConfigurerAdapter implements WebMvcConfigurer {
         //其他静态资源
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         //swagger增加url映射
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/picture/**").addResourceLocations("file:"+localpath);
     }
 
     @Bean

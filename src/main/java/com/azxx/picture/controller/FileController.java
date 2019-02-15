@@ -15,6 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -42,11 +46,34 @@ public class FileController extends BaseController {
     @Autowired
     private FileService fileService;
 
+
+    private final ResourceLoader resourceLoader;
+
     @Value("${img.dir}")
     private String filePath;
 
     @Value("${img.url}")
     private String imgUrl;
+
+    @Autowired
+    public FileController(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
+    /**
+     * 显示单张图片
+     * @return
+     */
+    @RequestMapping(path = "/show",method = RequestMethod.GET)
+    public ResponseEntity showPhotos(String fileName){
+
+        try {
+            // 由于是读取本机的文件，file是一定要加上的， path是在application配置文件中的路径
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get("D:\\newcoding\\pricterManage\\src\\main\\resources\\static\\customer\\img", "bbbbbbb.jpg").toString()));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @RequestMapping(path = "/getFiles", method = RequestMethod.POST)
     @ApiOperation(value = "获取图片列表", notes = "获取图片列表")
@@ -106,11 +133,11 @@ public class FileController extends BaseController {
         if (fileName.indexOf(".") > -1) {
             reqVo.setType(fileName.substring(fileName.lastIndexOf(".")));
         }
-        reqVo.setUrl(imgUrl+"static/customer/img/"+reqVo.getName());
+        reqVo.setUrl(imgUrl+reqVo.getName());
         try {
             String pathname = filePath + reqVo.getName();
             if(reqVo.getName().indexOf(reqVo.getType())<0){
-                reqVo.setUrl(imgUrl+"static/customer/img/"+reqVo.getName()+reqVo.getType());
+                reqVo.setUrl(imgUrl+reqVo.getName()+reqVo.getType());
                 pathname = filePath + reqVo.getName()+reqVo.getType();
             }
             fileService.addOrUpdateFile(reqVo);

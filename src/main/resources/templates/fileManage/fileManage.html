@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:include="header :: header" th:with="title='xx'"></head>
+<head th:include="/header :: header" th:with="title='xx'"></head>
 <body class="no-skin" style="background-color:Transparent;">
 <div class="row">
     <div class="col-xs-12">
@@ -59,7 +59,7 @@
     </div><!-- /.col -->
 </div><!-- /.row -->
 
-<head th:include="footer :: footer"></head>
+<head th:include="/footer :: footer"></head>
 <script src="/static/pages/fileManage/fileManage.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
