@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="footer">
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+    <script src="/static/js/jquery-2.1.4.min.js"></script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+    <!--[if lte IE 8]>
+    <script src="/static/js/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="/static/js/jquery-ui.custom.min.js"></script>
+    <script src="/static/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="/static/js/jquery.easypiechart.min.js"></script>
+    <script src="/static/js/jquery.sparkline.index.min.js"></script>
+    <script src="/static/js/jquery.flot.min.js"></script>
+    <script src="/static/js/jquery.flot.pie.min.js"></script>
+    <script src="/static/js/jquery.flot.resize.min.js"></script>
+
+    <script src="/static/js/moment.min.js"></script>
+
+    <!--jquery grid scripts-->
+    <script src="/static/js/bootstrap-colorpicker.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker.min.js"></script>
+    <script src="/static/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/static/js/bootstrap-timepicker.min.js"></script>
+    <script src="/static/js/jquery.jqGrid.min.js"></script>
+    <script src="/static/js/grid.locale-en.js"></script>
+
+    <!-- ace scripts -->
+    <script src="/static/js/ace-elements.min.js"></script>
+    <script src="/static/js/ace.min.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/ace-common.js"></script>
+    <script src="/static/js/daterangepicker.min.js"></script>
+    <script src="/static/pages/heart.js"></script>
+</head>
+</html>

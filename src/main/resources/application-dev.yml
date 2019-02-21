@@ -1,0 +1,92 @@
+server:
+  port: 9209
+
+weather:
+  query:
+#    url: http://api.help.bj.cn/apis/weather6d/?id=101280601
+    url: https://free-api.heweather.com/s6/weather/forecast?location=%E6%B7%B1%E5%9C%B3&key=be429c34e84e48f19e41f6072f7563a3
+
+# outlook 邮箱配置
+#spring:
+#
+#  mail:
+#    host : smtp.office365.com
+#    port : 587
+#    username : mr.xuzheng@outlook.com
+#    password : shouwang-13
+#    properties:
+#        mail:
+#          smtp:
+#            auth : true
+#            timeout : 25000
+#            socketFactory :
+#              fallback : true
+#            starttls:
+#              enable : true
+#              required : true
+
+
+spring:
+  # QQ邮箱配置
+  mail:
+    host : smtp.qq.com
+#    port : 465
+    username : mr.xuzheng@foxmail.com
+    password : vjzpmjnzvpepbiij
+    properties:
+      mail:
+        smtp:
+          auth : true
+          timeout : 25000
+          socketFactory :
+            fallback : true
+          starttls:
+            enable : true
+            required : true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+#    url: jdbc:mysql://47.101.138.153:3306/pictureManage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/picture_manage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+#    password: ShouWang-!3!4
+    password: shouwang13
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false
+    enabled: true
+    encoding: "utf-8"
+    mode: "HTML5"
+    prefix: "classpath:/templates/"
+    suffix: ".html"
+  http:
+    encoding:
+      charset: UTF-8
+email :
+  emailFrom : mr.xuzheng@foxmail.com
+
+# 设置日志级别
+logging:
+  level:
+    com.azxx.picture: debug
+
+# mybatis mapper 路径,mapperLocations指的路径是src/main/resources
+mybatis:
+  typeAliasesPackage: com.azxx.picture.entity
+  mapperLocations: classpath:mapper/*.xml
+  base-packages:
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+
+#swagger 开启关闭
+swagger:
+  enable: true
+
+img:
+  dir: D:/newcoding/pricterManage/src/main/resources/picture/
+  url: http://localhost:9209/picture/
+

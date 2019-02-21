@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Gallery - Ace Admin</title>
+
+    <meta name="description" content="responsive photo gallery using colorbox" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="/static/css/colorbox.min.css" />
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/static/css/fonts.googleapis.com.css" />
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/static/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/static/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="/static/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="/static/css/ace-rtl.min.css" />
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/static/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="/static/js/ace-extra.min.js"></script>
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="no-skin" style="background-color:Transparent;">
+
+
+<div class="main-container ace-save-state" id="main-container">
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div>
+                            <ul class="ace-thumbnails clearfix" id="imglist">
+                                <!--<li>-->
+                                    <!--<a href="http://localhost:8088/static/customer/img/star.jpg" data-rel="colorbox">-->
+                                        <!--<img width="150" height="150" alt="150x150" src="http://localhost:9209/fileManage/show" />-->
+                                        <!--<div class="text">-->
+                                            <!--<div class="inner">Sample Caption on Hover</div>-->
+                                        <!--</div>-->
+                                    <!--</a>-->
+
+                                    <!--<div class="tools tools-bottom">-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="ace-icon fa fa-pencil"></i>-->
+                                        <!--</a>-->
+
+                                        <!--<a href="#">-->
+                                            <!--<i class="ace-icon fa fa-times red"></i>-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                <!--</li>-->
+                            </ul>
+                        </div><!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+<script src="/static/js/jquery-2.1.4.min.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="/static/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='/static/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="/static/js/jquery.colorbox.min.js"></script>
+
+<!-- ace scripts -->
+<script src="/static/js/ace-elements.min.js"></script>
+<script src="/static/js/ace.min.js"></script>
+<script src="/static/js/utils.js"></script>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function($) {
+
+        /**
+         *
+         * @param imgurl
+         * @param title
+         * @param editurl
+         * @param delurl
+         */
+        function getLi(imgurl,title,editurl,delurl){
+            var li = ' <li> ' +
+                '<a href="'+imgurl+'" data-rel="colorbox">' +
+                    '<img width="150" height="150" alt="150x150" src="'+imgurl+'" /> ' +
+                    '<div class="text"> ' +
+                        '<div class="inner">'+title+'</div> ' +
+                    '</div> ' +
+                '</a> ' +
+                '<div class="tools tools-bottom"> ' +
+                    '<a href="#"> ' +
+                        '<i class="ace-icon fa fa-pencil"></i> ' +
+                    '</a> ' +
+                    '<a href="#"> ' +
+                        '<i class="ace-icon fa fa-times red"></i> ' +
+                    '</a> ' +
+                '</div> ' +
+                '</li>';
+            return li;
+        }
+
+        $.ajax({
+            url:  baseUrl + "/fileManage/getFiles",
+            type: "POST",
+            data: {},
+            success: function (response) {
+                var data = $.parseJSON(response);
+                if (data.code == 200) {
+                    if(data.data !=null && data.data.length>0){
+                        $("#imglist").empty();
+                        for (var i = 0;i<data.data.length;i++) {
+                            var tmp = data.data[i];
+                            var li = getLi(tmp.url,tmp.title,null,null);
+                            $("#imglist").append(li);
+                        }
+                        initBox();
+                    }
+                }
+                if (data.status == "error") {
+                    alert(data.msg);
+                }
+            },
+            error: function () {
+                alert("请求失败！");
+            }
+        });
+
+        function initBox(){
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition:true,
+                scalePhotos:true,
+                scrolling:false,
+                previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+                next:'<i class="ace-icon fa fa-arrow-right"></i>',
+                close:'&times;',
+                current:'{current} of {total}',
+                maxWidth:'100%',
+                maxHeight:'100%',
+                onOpen:function(){
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed:function(){
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete:function(){
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function(e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+        }
+
+
+    })
+
+</script>
+</body>
+</html>

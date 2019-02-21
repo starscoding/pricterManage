@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="/header" th:with="title='xx'" ></head>
+
+<body class="no-skin">
+<div id="navbar" class="navbar navbar-default          ace-save-state">
+    <div class="navbar-container ace-save-state" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+            <span class="sr-only">Toggle sidebar</span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="navbar-header pull-left">
+            <a href="index" class="navbar-brand">
+                <small>
+                    <i class="fa fa-leaf"></i>
+                    Star
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+
+                <li class="light-blue dropdown-modal">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="/static/images/avatars/user.jpg" alt="Jason's Photo"/>
+                        <span class="user-info">
+                            <small>Welcome,</small>
+                            mr.xuzheng
+                        </span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-cog"></i>
+                                Settings
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="profile.html">
+                                <i class="ace-icon fa fa-user"></i>
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div><!-- /.navbar-container -->
+</div>
+
+<div class="main-container ace-save-state" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
+
+    <div id="sidebar" class="sidebar responsive ace-save-state">
+        <script type="text/javascript">
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
+        </script>
+
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                <button class="btn btn-success">
+                    <i class="ace-icon fa fa-signal"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                <span class="btn btn-success"></span>
+            </div>
+        </div><!-- /.sidebar-shortcuts -->
+
+        <ul class="nav nav-list">
+            <li class="active">
+                <a href="index">
+                    <i class="menu-icon fa fa-tachometer"></i>
+                    <span class="menu-text"> 首页 </span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+
+            <li class="" onclick="setActive('pictureManage')" id = "pictureManage">
+                <a href="/fileManage/index" target="mainFrame">
+                    <i class="menu-icon fa fa-image"></i>
+                    <span class="menu-text"> 相片管理 </span>
+                    <b class="arrow"></b>
+                </a>
+                <b class="arrow"></b>
+            </li>
+            <li class="" onclick="setActive('groupManage')" id = "groupManage">
+                <a href="/groupManage/index" target="mainFrame">
+                    <i class="menu-icon fa fa-tag"></i>
+                    <span class="menu-text"> 分组管理 </span>
+                    <b class="arrow"></b>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        </ul><!-- /.nav-list -->
+
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/index">主页</a>
+                    </li>
+                    <li class="active">Hi</li>
+                </ul><!-- /.breadcrumb -->
+
+                <div class="nav-search" id="nav-search">
+                    <form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input"
+                                           id="nav-search-input" autocomplete="off"/>
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+                    </form>
+                </div><!-- /.nav-search -->
+            </div>
+
+            <div class="page-content" id = "iframDiv" style="padding: 10px;margin-bottom: 0px;">
+                <iframe name="mainFrame" id="mainFrame" src="/welcome/index" frameborder="0" scrolling="auto"  width="100%" height="100%" allowtransparency="true" onload="setIframeHeight(this)"></iframe>
+            </div>
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="footer-content" id="footer">
+                <span class="bigger-120">
+                    <span class="blue bolder">Mr.xuzheng &copy; 2019</span>
+                </span>
+                <span class="action-buttons">
+                    <a href="#">
+                        <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+<head th:include="/footer"></head>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    function setIframeHeight(iframe){
+        // alert($("#main-container").height());
+        // iframe.height = $("#main-container").height();
+        // alert(document.body.clientWidth);
+        iframe.height = $(window).height()-$("#navbar").height()-$("#breadcrumbs").height()-$("#footer").height()-80;
+        iframe.width = $("#iframDiv").width();
+        // if(iframe){
+        //     var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        //     if(iframeWin.document.body){
+        //         iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+        //     }
+        // }
+    }
+
+    function setActive(activeId) {
+        resetActive();
+        $("#"+activeId).addClass("active");
+    }
+
+    function resetActive(){
+        var obj = $(".active:first");
+        if(obj == null || obj.size()==0){
+            return;
+        }
+        obj.removeClass("active");
+        for(var i = 0; i<obj.size();i++){
+            console.log(obj[i]);
+//            obj[i].removeClass("active");
+        }
+
+    }
+
+</script>
+</body>
+</html>

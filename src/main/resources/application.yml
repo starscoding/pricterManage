@@ -1,0 +1,4 @@
+## 启用dev配置
+spring:
+  profiles:
+    active: pro

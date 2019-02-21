@@ -1,0 +1,53 @@
+* {margin:0;padding:0;font-size:62.5%;}
+body {margin:0px;font-family:"å¾®è½¯é›…é»‘",Arial;overflow:-Scroll;overflow-x:hidden;color:#000;}
+
+
+
+/*åˆ—è¡¨å¸ƒå±€*/
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+   &::after {//å¤„ç†æœ€åŽä¸€è¡Œ
+      content: '';
+      flex-grow: 999999999;
+    }
+}
+
+.gallery div{
+  flex-grow: 1;
+  margin:5px;
+  background-color: violet;
+  height:200px;
+}
+.gallery img{
+  height:200px;
+  object-fit: cover;
+  max-width: 100%;
+  min-width: 100%;
+  vertical-align: bottom;
+}
+/*ç»“æŸ*/
+
+
+.pressing{
+    text-align: center;
+    position: fixed;
+    bottom: 78px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    width: 51%;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: 7px;
+    margin: 0 auto;
+}
+.pressing p{
+    font-size: 1.4rem;
+    color:#fff;
+}
+#goTopBtn{position:fixed;line-height: 38px;width: 46px;bottom: 47px;height: 46px;border-radius:50px;cursor:pointer;display:none;background:#000;-moz-opacity:0.5;-khtml-opacity:0.5;opacity:0.5;color:#FFFFFF;text-align:center;font-size: 5rem;z-index: 990;}
+@font-face{font-weight:400;font-style:normal;font-family:SinaHomeFont;src:url(../img/HomeFont.eot);src:url(../img/HomeFont.eot) format('embedded-opentype'),url(../img/HomeFont.woff) format('woff'),url(../img/HomeFont.ttf) format('truetype');}
+[class*=" icon_"],[class^=icon_]{text-transform:none;font-weight:400;font-style:normal;font-variant:normal;font-family:SinaHomeFont;line-height:1;speak:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+
+.icon_top:before{content:"\e60f";}
